@@ -42,3 +42,8 @@ alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true &&
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Anaconda
+alias conda='$HOME/opt/anaconda/bin/conda'
+alias activate='source $HOME/opt/anaconda/bin/activate'
+alias deactivate='source $HOME/opt/anaconda/bin/deactivate'

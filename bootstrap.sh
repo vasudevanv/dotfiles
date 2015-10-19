@@ -9,7 +9,7 @@ function copyfiles() {
 	  --exclude "README.md"    \
 	  --exclude "configs/"     \
 	  --exclude "junk/"        \
-	  --delete -avh --no-perms . ~
+	  -avh --no-perms . ~
 
     source ~/.bash_profile
 }
