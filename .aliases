@@ -3,6 +3,7 @@
 # aliases
 
 # Shortcuts
+alias apps="cd ~/Applications"
 alias dropbox="cd ~/Dropbox"
 alias downloads="cd ~/Downloads"
 alias desktop="cd ~/Desktop"
@@ -44,6 +45,6 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # Anaconda
-alias conda='$HOME/opt/anaconda/bin/conda'
-alias activate='source $HOME/opt/anaconda/bin/activate'
-alias deactivate='source $HOME/opt/anaconda/bin/deactivate'
+alias conda='$HOME/Applications/anaconda/bin/conda'
+alias activate='source $HOME/Applications/anaconda/bin/activate'
+alias deactivate='source $HOME/Applications/anaconda/bin/deactivate'
