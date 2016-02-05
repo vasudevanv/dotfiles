@@ -32,4 +32,5 @@ fi
 # Load RVM into a shell session 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-
+# Load environment modules into a shell session
+[[ -s /Applications/modules-3.2.10/Modules/3.2.10/init/bash ]] && source "$HOME/Applications/modules-3.2.10/Modules/3.2.10/init/bash"
