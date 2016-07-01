@@ -79,3 +79,9 @@ Thumbs.db
 *.dll
 *.lib
 *.sbr
+
+# Repo specific
+# -------------
+.gitignore
+.extra
+
