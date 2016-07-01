@@ -82,6 +82,5 @@ Thumbs.db
 
 # Repo specific
 # -------------
-.gitignore
 .extra
-
+setup_osx.sh
