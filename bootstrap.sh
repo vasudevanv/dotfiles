@@ -9,6 +9,7 @@ function copyfiles() {
 	  --exclude "README.md"    \
 	  --exclude "configs/"     \
 	  --exclude "junk/"        \
+          --exclude "setup_osx.sh" \
 	  -avh --no-perms . ~
 
     source ~/.bash_profile
