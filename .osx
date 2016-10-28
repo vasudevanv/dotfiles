@@ -9,13 +9,9 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # Add tab completion for many Bash commands
-if which brew > /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]
-then
-    source "$(brew --prefix)/share/bash-completion/bash_completion"
-elif [ -f /etc/bash_completion ]
-then
-    source /etc/bash_completion
+if which brew > /dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
 fi
 
 # Load environment modules into a shell session
-[[ -s /Applications/modules-3.2.10/Modules/3.2.10/init/bash ]] && source "$HOME/Applications/modules-3.2.10/Modules/3.2.10/init/bash"
+[[ -s /usr/local/opt/modules/Modules/init/bash ]] && source "/usr/local/opt/modules/Modules/init/bash"
