@@ -38,13 +38,7 @@ alias del="rm -rf \#* *~"
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# Show/Hide files
-alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
 # Anaconda
-alias conda='$HOME/Apps/anaconda/bin/conda'
-alias activate='source $HOME/Apps/anaconda/bin/activate'
-alias deactivate='source $HOME/Apps/anaconda/bin/deactivate'
+alias conda='$HOME/Applications/anaconda/bin/conda'
+alias activate='source $HOME/Applications/anaconda/bin/activate'
+alias deactivate='source $HOME/Applications/anaconda/bin/deactivate'

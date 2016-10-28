@@ -114,32 +114,32 @@ set_prompts() {
     # build the prompt
 
     # logged in as root
-    if [[ "$USER" == "root" ]]; then
-        userStyle="\[$bold$red\]"
+    if [[ "${USER}" == "root" ]]; then
+        userStyle="${bold}${red}"
     else
-        userStyle="\[$orange\]"
+        userStyle="${orange}"
     fi
 
     # connected via ssh
-    if [[ "$SSH_TTY" ]]
+    if [[ "${SSH_TTY}" ]]
     then
-        hostStyle="\[$bold$red\]"
+        hostStyle="${bold}${red}"
     else
-        hostStyle="\[$yellow\]"
+        hostStyle="${yellow}"
     fi
 
     # set the terminal title to the current working directory
     PS1="\[\033]0;\w\007\]"
 
     PS1+="\n" # newline
-    PS1+="\[$userStyle\]\u" # username
-    PS1+="\[$reset$white\] @ "
-    PS1+="\[$hostStyle\]\h" # host
-    PS1+="\[$reset$white\]: "
-    PS1+="\[$green\]\w" # working directory
-    PS1+="\$(prompt_git \"$white on $cyan\")" # git repository details
+    PS1+="${userStyle}\u" # username
+    PS1+="${reset}${white} @ "
+    PS1+="${hostStyle}\h" # host
+    PS1+="${reset}${white}: "
+    PS1+="${green}\w" # working directory
+    PS1+="\$(prompt_git \"${white} on ${cyan}\")" # git repository details
     PS1+="\n"
-    PS1+="\[$reset$white\]\$ \[$reset\]" # $ (and reset color)
+    PS1+="${reset}${white}\$ ${reset}" # $ (and reset color)
 
     export PS1
 }
