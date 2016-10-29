@@ -19,7 +19,8 @@ function copyfiles() {
     if [ "$(uname)" == "Darwin" ]; then
 	rsync -avh --no-perms .osx ~
 	rsync -avh --no-perms bin ~
-	sed -i 's/,functions}/,functions,osx\}/' ~/.bash_profile
+	sed -i.bkp "s/,functions\}/,functions,osx\}/" ~/.bash_profile
+	rm -rf ~/.bash_profile.bkp
     else	
         continue
     fi
