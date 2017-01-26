@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Remove a file from git history. This is useful if you accidentally 
+# committed sensitive information
+
+((!$#)) && echo No filename provided, command ignored! && exit 1
+
+echo 'This will delete $1 from the history'
+read -p "Are you sure? " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    git filter-branch --force --index-filter \
+        'git rm --cached --ignore-unmatch $1' \
+        --prune-empty --tag-name-filter cat -- --all
+fi
