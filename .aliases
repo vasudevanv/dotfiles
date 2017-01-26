@@ -4,7 +4,6 @@
 
 # Shortcuts
 alias apps="cd ~/Applications"
-alias dropbox="cd ~/Dropbox"
 alias downloads="cd ~/Downloads"
 alias desktop="cd ~/Desktop"
 alias docs="cd ~/Documents"
