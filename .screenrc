@@ -3,15 +3,26 @@
 # Disable the startup message
 startup_message off
 
+# Autodetach
+autodetach on
+
 # Set a large scrollback buffer
 defscrollback 32000
 
 # Always start `screen` with UTF-8 enabled (`screen -U`)
 defutf8 on
 
+# Visual bell 
+vbell off
+
 # Set the default window name to empty string instead of the arbitrary "bash"
 shelltitle ''
- 
+
+# Allow xterm / Terminal scrollbars to access the scrollback buffer. This 
+# enables the behavior you'd expect, instead of losing the content that scrolls 
+# out of the window. 
+termcapinfo xterm-256color|xterm-color|xterm|xterms|xs|rxvt ti@:te@
+
 # Set the window caption.
 # I use caption instead of hardstatus, so it is available per split window too
 # (hardstatus is only per complete screen).
