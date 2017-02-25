@@ -4,6 +4,19 @@
 
 # Shell prompt based on the Solarized Dark theme.
 
+hg_dirty() {
+    hg status 2> /dev/null \
+	| awk '$1 == "?" { unknown = 1 }
+	       $1 != "?" { changed = 1 }
+	       END {
+	         s="" 
+		 if (unknown) s = s "?"	
+                 if (changed) s = s "+" 
+                 
+		 printf "%s",s
+               }'
+}
+
 prompt_git() {
     
     local s=""
@@ -43,19 +56,30 @@ prompt_git() {
 	    then
                 s="$s$"
             fi
-
-        fi
-
+	fi
         # get the short symbolic ref
         # if HEAD isn't a symbolic ref, get the short SHA
         # otherwise, just give up
-        branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
-                      git rev-parse --short HEAD 2> /dev/null || \
-                      printf "(unknown)")"
-
+        branchName="git:$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+        		                git rev-parse --short HEAD 2> /dev/null || printf "(unknown)")"
+	
         [ -n "$s" ] && s=" [$s]"
-
         printf "%s" "$1$branchName$s"
+	
+    elif [ $(hg identify &>/dev/null; printf "%s" $?) == 0 ]
+    then
+
+	branch=$(hg branch 2>/dev/null)
+	if [ -n "${branch}" ]
+	then
+	    s=$(hg_dirty)
+	fi
+        
+	# Get the branch name
+        branchName="hg:${branch}"
+        [ -n "$s" ] && s=" [$s]"
+        printf "%s" "$1$branchName$s"
+
     else
         return
     fi
