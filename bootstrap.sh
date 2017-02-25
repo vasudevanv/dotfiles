@@ -11,19 +11,7 @@ function copyfiles() {
 	--exclude "configs/"     \
 	--exclude "junk/"        \
         --exclude "setup_osx.sh" \
-	--exclude ".osx" \
-	--exclude "bin/" \
 	-avh --no-perms . ~
-
-    # Perform operating system specific operations
-    if [ "$(uname)" == "Darwin" ]; then
-	rsync -avh --no-perms .osx ~
-	rsync -avh --no-perms bin ~
-	sed -i.bkp "s/,functions\}/,functions,osx\}/" ~/.bash_profile
-	rm -rf ~/.bash_profile.bkp
-    else	
-        continue
-    fi
 
     source ~/.bash_profile
 }
