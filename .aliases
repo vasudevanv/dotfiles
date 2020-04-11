@@ -9,6 +9,10 @@ alias downloads="cd ~/Downloads"
 alias desktop="cd ~/Desktop"
 alias docs="cd ~/Documents"
 
+# Useful size commands
+# alias dirsize="find -maxdepth 1 -type d -name '[!.]*' -exec du -sh {} + | sort -hr"
+alias dirsize="du -hxs ./* | sort -rh"
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1
 then 
