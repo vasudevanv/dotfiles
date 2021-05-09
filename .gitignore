@@ -79,8 +79,16 @@ Thumbs.db
 *.dll
 *.lib
 *.sbr
+*.vscode
 
 # Repo specific
 # -------------
 .extra
 setup_osx.sh
+
+# Python specific
+# ---------------
+*.pyc
+__pycache__
+.ipynb_checkpoint*
+.pytest_cache

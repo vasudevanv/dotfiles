@@ -3,17 +3,17 @@
 cd "$(dirname "${BASH_SOURCE}")";
 
 function copyfiles() {
-    rsync --exclude ".git/"        \
+    rsync --exclude ".git/"  \
 	--exclude ".DS_Store"    \
-	--exclude "*~" \
 	--exclude "bootstrap.sh" \
 	--exclude "README.md"    \
-	--exclude "configs/"     \
-	--exclude "junk/"        \
-        --exclude "setup_osx.sh" \
+	--exclude "setup_osx.sh" \
+    --exclude "setup_linux.sh" \
+    --exclude "configs/" \
+    --exclude "*~" \
 	-avh --no-perms . ~
 
-    source ~/.bash_profile
+    source ~/.bashrc
 }
 
 if [ "$1" == "--force" ]
