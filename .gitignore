@@ -84,7 +84,6 @@ Thumbs.db
 # Repo specific
 # -------------
 .extra
-setup_osx.sh
 
 # Python specific
 # ---------------

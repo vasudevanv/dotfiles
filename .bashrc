@@ -6,7 +6,7 @@
 export PATH="$HOME/bin:$PATH:/usr/local/cuda-11.3/bin";
 
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_prompt,functions}
+for file in ~/.{bash_prompt,functions,osx}
 do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
