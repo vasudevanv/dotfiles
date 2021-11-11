@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# osx specific
+
+# Show/Hide files
+alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Add tab completion for many Bash commands
+if which brew > /dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
+# Load environment modules into a shell session
+[[ -s /usr/local/opt/modules/Modules/init/bash ]] && source "/usr/local/opt/modules/Modules/init/bash"

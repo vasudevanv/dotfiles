@@ -10,6 +10,8 @@ function copyfiles() {
 	--exclude "setup_osx.sh" \
     --exclude "setup_linux.sh" \
     --exclude "configs/" \
+    --exclude "osx/" \
+    --exclude "linux/" \
     --exclude "*~" \
 	-avh --no-perms . ~
 
