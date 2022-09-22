@@ -1,9 +1,3 @@
-;; spolsky-theme.el
-;; A dark color theme based off of Sublime Text 2
-
-;; Keywords: themes
-;; Package-Requires: ((emacs "24.1"))
-
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
@@ -17,29 +11,22 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-; Usage
-;; To use it, put the following in your Emacs configuration file:
-
-;;   (load-theme 'spolsky t)
+;; ---------------------------
 ;;
-;; Requirements: Emacs 24.
-
-;; Credits:
-
-;; Thanks to the Sublime Text 2 
-
-;; Code:
+;; Spolsky : A dark color theme
+;;
+;; ----------------------------
 
 (unless (>= emacs-major-version 24)
   (error "requires Emacs 24 or later."))
 
-(deftheme spolsky
-  "A dark color theme for Emacs based on Sublime Text 2")
-(display-color-cells (selected-frame))
+(deftheme spolsky  "A dark color theme for Emacs based on Sublime Text 2")
 
-(let ((class '((class color) (min-colors 89)))
-      (256color (eq (display-color-cells (selected-frame)) 256))
-      (*background* (if window-system "#161A1F" "unspecified-bg"))
+(custom-theme-set-variables
+  'spolsky
+  '(linum-format " %7i "))
+
+(let ((*background*         "#161A1F")
       (*comments*           "#8C8C8C")
       (*constant*           "#FF80F4")
       (*current-line*       "#151515")
@@ -47,13 +34,13 @@
       (*keywords*           "#F92672")
 
       ;; Sidebar line numbers
-      (*line-number*  (if window-system "#161A1F" "unspecified-bg"))
+      (*line-number*        "#161A1F")
       (*line-fg*            "#666")
 
       (*type-face*          "#66D9EF")
       (*method-declaration* "#A6E22E")
-      (*mode-line-bg*       (if window-system "#333" "unspecified-bg"))
-      (*mode-inactive-bg*   (if window-system "#222" "unspecified-bg"))
+      (*mode-line-bg*       "#333")
+      (*mode-inactive-bg*   "#222")
       (*mode-line-fg*       "#EEDC82")
       (*mode-inactive-fg*   "#555")
       (*normal*             "#DEDEDE")
@@ -121,9 +108,7 @@
    ))
 
 ;;;###autoload
-(when (and (boundp 'custom-theme-load-path)
-	   load-file-name)
-  ;; add theme folder to `custom-theme-load-path' when installing over MELPA
+(when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
@@ -132,4 +117,5 @@
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:
+
 

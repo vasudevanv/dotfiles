@@ -6,7 +6,7 @@
 export PATH="$HOME/bin:$PATH:/usr/local/cuda-11.3/bin";
 
 # Load the shell dotfiles, and then some:
-for file in ~/.{bash_prompt,functions,osx}
+for file in ~/.{bash_prompt,functions}
 do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
@@ -64,7 +64,8 @@ else
 fi
 
 # List all files colorized in long format
-alias ls="ls -lF ${colorflag}"
+alias ls="ls -F ${colorflag}"
+alias ll="ls -lF ${colorflag}"
 
 # List all files colorized in long format, including dot files
 alias la="ls -laF ${colorflag}"
@@ -99,7 +100,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # rbenv for ruby
 export PATH="$HOME/.rbenv/bin:$PATH"

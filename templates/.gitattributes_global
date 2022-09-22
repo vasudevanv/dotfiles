@@ -1,0 +1,5 @@
+# gitattributes_global
+
+# Clean Jupyter Notebooks
+# -----------------------
+*.ipynb filter=nbstrip_full

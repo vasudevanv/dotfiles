@@ -1,0 +1,16 @@
+# .hgrc
+
+[ui]
+username = Vasudevan Venkateshwaran <vasu.chemical@gmail.com>
+editor = vim
+
+[extensions]
+largefiles = 
+color =
+
+[web]
+allow_archive = gz zip
+
+[largefiles]
+patterns = *.{png,jpg,tiff,svg,pdf,gz,zip,tar} tarfiles/*
+

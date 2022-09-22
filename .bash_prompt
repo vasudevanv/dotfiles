@@ -2,8 +2,6 @@
 
 # bash_prompt
 
-# Shell prompt based on the Solarized Dark theme.
-
 hg_dirty() {
     hg status 2> /dev/null \
 	| awk '$1 == "?" { unknown = 1 }
@@ -171,6 +169,43 @@ set_prompts() {
 set_prompts
 unset set_prompts
 
+# # prompt.sh 
+# 
+# COMPUTER=${HOSTNAME%%.*}
+# 
+# # Terminal colors
+# export CLICOLOR=1
+# export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+# 
+# 
+# # Basic command prompt
+# PS1="\u@${COMPUTER} \W $ "
+# 
+# # Command prompt to display version control information
+# if [ __git_ps1 -a hg ]
+# then
+#     function be_get_branch {
+# 	local dir="$PWD"
+# 	local vcs
+# 	local nick
+# 	while [[ "$dir" != "/" ]]; do
+# 	    for vcs in git hg; do
+# 		if [[ -d "$dir/.$vcs" ]] && hash "$vcs" &>/dev/null; then
+# 		    case "$vcs" in
+# 			git) __git_ps1 "${1:-(%s) }"; return;;
+# 			hg) nick=$(hg branch 2>/dev/null);;
+# 		    esac
+# 		    [[ -n "$nick" ]] && printf "${1:-(%s) }" "$nick"
+# 		    return 0
+# 		fi
+# 	    done
+# 	    dir="$(dirname "$dir")"
+# 	done
+#     }
+#     
+#     export GIT_PS1_SHOWDIRTYSTATE=yes
+#     export PS1="\u@${COMPUTER} \W \$(be_get_branch "$2") $ ";
+# fi
 
 
 

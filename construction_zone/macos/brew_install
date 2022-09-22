@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Check for Xcode installation
+if [ ! -d /Applications/Xcode.app ]; then
+    fail "Need Xcode to be installed before running this script"
+fi
+
+# Install homebrew and some basic formulae
+if test ! $(which brew)
+then
+    info 'Installing Homebrew'
+    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" \
+	> /tmp/homebrew-install.log
+fi
+
+# Check if homebrew installation is working correctly
+brew doctor
+
+# Make sure we’re using the latest Homebrew
+brew update
+
+# Upgrade any already-installed formulae
+brew upgrade
+
+# Install GNU core utilities (those that come with OS X are outdated)
+brew install coreutils
+
+echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+brew install findutils
+
+# Install Bash 4
+brew install bash
+
+# Install wget with IRI support
+brew install wget --enable-iri
+
+# Install other useful binaries
+brew install git
+brew install mercurial
+brew install imagemagick
+brew install tree
+
+# Remove outdated versions from the cellar
+brew cleanup
+
+# # Casks - CLI to install dmg based files
+# brew tap phinze/homebrew-cask
+# brew install brew-cask
+# 
+# function installcask() {
+#         brew cask install "${@}" 2> /dev/null
+# }
+# 
+# installcask dropbox
+# installcask google-chrome
+

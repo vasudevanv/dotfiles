@@ -1,5 +1,8 @@
 # screenrc
 
+# Escape character
+# escape ^Bz
+
 # Disable the startup message
 startup_message off
 
