@@ -2,9 +2,6 @@
 	name = XXNAME
 	email = XXEMAIL
 
-[github]
-        user = vasudevanv
-
 [color]
 	ui = auto
 	
@@ -42,3 +39,9 @@
 
 [credential]
 	helper = store
+
+[alias]
+	dv = difftool -t vimdiff -y
+	ll = log --oneline
+	mergetest = "!f(){ git merge --no-commit --no-ff \"$1\"; git merge --abort; echo \"Merge aborted\"; };f ""; };f "
+
