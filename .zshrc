@@ -36,12 +36,6 @@ export MANPAGER='less -X'
 # Always enable colored `grep` output.
 export GREP_OPTIONS='--color=auto'
 
-# Case-insensitive globbing (used in pathname expansion)
-# shopt -s nocaseglob
-
-# Append to the Bash history file, rather than overwriting it
-# shopt -s histappend
-
 # aliases
 
 # Shortcuts
@@ -79,7 +73,7 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # Delete emacs backup files
-alias del="rm -rf \#* *~"
+alias del="rm -rf \#*(N) *~(N)"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
@@ -96,7 +90,7 @@ eval "$(rbenv init -)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/vvenkate/Applications/miniforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/vvenkate/Applications/miniforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -108,4 +102,16 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Load completions
+# zsh completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+fi
+
+# git completions
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+FPATH=~/.zsh:$FPATH
+
+autoload -Uz compinit && compinit
 
