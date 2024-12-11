@@ -45,15 +45,6 @@ configure_version_control ()
     sed -e "s/XXNAME/${git_name}/g; s/XXEMAIL/${git_email}/g" \
 	$DPATH/templates/gitconfig.template > $DPATH/.gitconfig
     success 'Configured git settings'
-    
-    # Mercurial
-    # query 'Enter your hg user name : '
-    # read hg_name
-    # query 'Enter your hg email : '
-    # read hg_email
-    # sed -e "s/XXNAME/${hg_name}/g; s/XXEMAIL/${hg_email}/g" \
-	# $DPATH/hg/hgrc.template > $DPATH/hg/hgrc.link
-    # success 'Configured mercurial settings'
 }
 
 # Linking and copying files
@@ -109,78 +100,3 @@ else
 fi
 
 unset copyfiles
-
-# Install all the links from install.sh (below)
-# Script to install some basic applications
-
-# Get current directory path
-# DIR="`pwd`"
-
-
-# # Check for Xcode installation
-# if [ ! -d /Applications/Xcode.app ]; then
-#     fail "Need Xcode to be installed before running this script"
-# fi
-# 
-# 
-# 
-# symlink_dotfiles () 
-# {
-#     info 'Linking dotfiles to the home directory'
-#     for source in `find $DPATH -maxdepth 1 -name \*.link`
-#     do
-# 	dest="$HOME/.`basename \"${source%.*}\"`"
-# 	if [ -f $dest -o -d $dest ]
-# 	then
-# 	    info "$dest exists. Replacing old version of $dest with new one"
-# 	    rm -rf $dest
-# 	    link_files $source $dest
-# 	else
-# 	    link_files $source $dest
-# 	fi
-#     done
-# }
-# 
-# copy_dotfiles () 
-# {
-#     info 'Copying dotfiles to the home directory'
-#     for source in `find $DPATH -maxdepth 2 -name \*.link`
-#     do
-# 	dest="$HOME/.`basename \"${source%.*}\"`"
-# 	if [ -f $dest -o -d $dest ]
-# 	then
-# 	    info "$dest exists. Replacing old version of $dest with new one"
-# 	    rm -rf $dest
-# 	    copy_files $source $dest
-# 	else
-# 	    copy_files $source $dest
-# 	fi
-#     done
-# }
-# 
-# # Run functions
-# set -e
-# # configure_version_control
-# copy_dotfiles
-# source $HOME/.bash_profile
-
-
-# Removes all the links created by install.sh in the user's homefolder
-
-# unlink_dotfiles () 
-# {
-#     info 'Unlinking dotfiles from the home directory'
-#     for source in `find $DIR -maxdepth 2 -name \*.link`
-#     do
-# 	dest="$HOME/.`basename \"${source%.*}\"`"
-# 	if [ -f $dest -o -d $dest ]
-# 	then
-# 	    success "Removing $dest"
-# 	    rm -rf $dest
-# 	fi
-#     done
-# }
-# 
-# # Run functions
-# set -e
-# unlink_dotfiles

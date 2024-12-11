@@ -1,0 +1,132 @@
+#!/bin/bash
+
+# functions
+
+# Create a new directory and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$_"
+}
+
+# Determine size of a file or total size of a directory
+function fs() {
+    if du -b /dev/null > /dev/null 2>&1
+    then
+    	local arg=-sbh
+    else
+	local arg=-sh
+    fi
+
+    if [[ -n "$@" ]]
+    then
+    	du $arg -- "$@"
+    else
+	du $arg .[^.]* *
+    fi
+}
+
+# Use Git’s colored diff when available
+hash git &>/dev/null
+if [ $? -eq 0 ]
+then
+    function diff() {
+    	git diff --no-index --color-words "$@"
+    }
+fi
+
+
+# Ghostscript functions
+combinepdf () { 
+    if [ $# -lt 2 ]
+    then
+        echo 'Usage: combinepdf File1.pdf File2.pdf'
+        echo 'Note : Output is written to file1.pdf. Other files are deleted' 
+        exit
+    fi
+    gs -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=tempcombinepdf.pdf \
+        $@
+    if [ -f tempcombinepdf.pdf ]
+    then
+        rm -rf $@
+        mv tempcombinepdf.pdf $1
+    fi
+}
+
+reducepdf () { 
+    if [ $# -lt 2 ]
+    then
+        echo 'Usage: reducepdf input.pdf output.pdf' 
+        exit
+    fi
+    gs -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dQUIET -dBATCH \
+	-dNOPAUSE -sDEVICE=pdfwrite \
+	-sOutputFile=$2 $1
+}
+
+# Function to extract specific pages from a PDF
+extract_pdf_pages() {
+    local input_pdf="$1"
+    local output_pdf="$2"
+    local start_page="$3"
+    local end_page="$4"
+
+    # Validate input
+    if [ -z "$input_pdf" ] || [ -z "$output_pdf" ] || [ -z "$start_page" ] || [ -z "$end_page" ]; then
+        echo "Usage: extract_pdf_pages input.pdf output.pdf start_page end_page"
+        return 1
+    fi
+
+    # Check if input file exists
+    if [ ! -f "$input_pdf" ]; then
+        echo "Error: Input PDF $input_pdf does not exist"
+        return 1
+    fi
+
+    # Use gs (Ghostscript) to extract pages
+    gs -sDEVICE=pdfwrite \
+       -dNOPAUSE \
+       -dBATCH \
+       -dFirstPage="$start_page" \
+       -dLastPage="$end_page" \
+       -sOutputFile="$output_pdf" \
+       "$input_pdf"
+
+    # Check if extraction was successful
+    if [ $? -eq 0 ] && [ -f "$output_pdf" ]; then
+        echo "Successfully extracted pages $start_page-$end_page to $output_pdf"
+        return 0
+    else
+        echo "Error: Failed to extract pages"
+        return 1
+    fi
+}
+
+# Rename a set of files that have spaces to underscores
+rename_spaces_to_underscores() {
+  # Check if the directory argument is provided
+  if [ -z "$1" ]; then
+    echo "Please provide a directory."
+    return 1
+  fi
+
+  # Check if the provided argument is a valid directory
+  if [ ! -d "$1" ]; then
+    echo "The provided path is not a valid directory."
+    return 1
+  fi
+
+  # Navigate to the provided directory
+  cd "$1" || return 1
+
+  # Loop through all files in the directory
+  for file in *; do
+    if [[ -f "$file" ]]; then
+      # Replace spaces with underscores
+      new_name="${file// /_}"
+      # Rename the file if the name changes
+      if [[ "$file" != "$new_name" ]]; then
+        mv "$file" "$new_name"
+        echo "Renamed: $file -> $new_name"
+      fi
+    fi
+  done
+}

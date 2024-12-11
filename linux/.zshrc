@@ -78,40 +78,25 @@ alias del="rm -rf \#*(N) *~(N)"
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/home/vasu/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/home/vasu/Applications/micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT
+_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
 
 # rbenv for ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# Load Angular CLI autocompletion.
-# source <(ng completion script)
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/vvenkate/Applications/miniforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/vvenkate/Applications/miniforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/vvenkate/Applications/miniforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/vvenkate/Applications/miniforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # Load completions
 # zsh completions
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-fi
-
-# git completions
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-FPATH=~/.zsh:$FPATH
-
+fpath=(~/.zsh $fpath) 
 autoload -Uz compinit && compinit
-
