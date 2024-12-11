@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 
 # zshrc
 
@@ -73,7 +73,7 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
 # Delete emacs backup files
-alias del="rm -rf \#*(N) *~(N)"
+alias del="rm -rf \#* *~"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
@@ -95,8 +95,3 @@ unset __mamba_setup
 # rbenv for ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
-# Load completions
-# zsh completions
-fpath=(~/.zsh $fpath) 
-autoload -Uz compinit && compinit

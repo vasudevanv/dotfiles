@@ -1,19 +1,6 @@
 #!/bin/bash
 
-# bash_prompt
-
-function hg_dirty() {
-    hg status 2> /dev/null \
-	| awk '$1 == "?" { unknown = 1 }
-	       $1 != "?" { changed = 1 }
-	       END {
-	         s="" 
-		 if (unknown) s = s "?"	
-                 if (changed) s = s "+" 
-                 
-		 printf "%s",s
-               }'
-}
+# zsh_prompt
 
 function prompt_git() {
     
@@ -25,35 +12,35 @@ function prompt_git() {
     then
 	# check if the current directory is in .git before running git checks
         if [[ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == "false" ]]
-	then
+	    then
 
             # ensure index is up to date
             git update-index --really-refresh  -q &>/dev/null
 
             # check for uncommitted changes in the index
             if ! $(git diff --quiet --ignore-submodules --cached)
-	    then
+	        then
                 s="$s\+"
             fi
 
             # check for unstaged changes
             if ! $(git diff-files --quiet --ignore-submodules --)
-	    then
+	        then
                 s="$s\!"
             fi
 
             # check for untracked files
             if [ -n "$(git ls-files --others --exclude-standard)" ]
-	    then
+	        then
                 s="$s\?"
             fi
 
             # check for stashed files
             if $(git rev-parse --verify refs/stash &>/dev/null)
-	    then
+	        then
                 s="$s\$"
             fi
-	fi
+	    fi
         # get the short symbolic ref
         # if HEAD isn't a symbolic ref, get the short SHA
         # otherwise, just give up
@@ -61,21 +48,6 @@ function prompt_git() {
 	
         [ -n "$s" ] && s=" [$s]"
         printf "%s\n" "$1$branchName$s"
-	
-    elif [[ $(hg identify &>/dev/null; printf "%s" $?) == 0 ]]
-    then
-
-	branch=$(hg branch 2>/dev/null)
-	if [ -n "${branch}" ]
-	then
-	    s=$(hg_dirty)
-	fi
-        
-	# Get the branch name
-        branchName="hg:${branch}"
-        [ -n "$s" ] && s=" [$s]"
-        printf "%s" "$1$branchName$s"
-
     else
         return
     fi
@@ -130,22 +102,9 @@ set_prompts() {
     fi
 
     setopt prompt_subst
-    PS1="${userStyle}%n ${reset}${white}@${reset} ${hostStyle}%m: ${green}%~"
+    PS1="\${newline}${userStyle}%n ${reset}${white}@${reset} ${hostStyle}%m: ${green}%~"
     PS1+="\$(prompt_git \"${white} on ${cyan}\")"
     PS1+="${newline}${white}\$ ${reset}"
-    
-    # set the terminal title to the current working directory
-    # PS1="\[\033]0;\w\007\]"
-    # 
-    # PS1+="\n" # newline
-    # PS1+="\[${userStyle}\]\u" # username
-    # PS1+="\[${reset}\]\[${white}\] @ "
-    # PS1+="\[${hostStyle}\]\h" # host
-    # PS1+="\[${reset}\]\[${white}\]: "
-    # PS1+="\[${green}\]\w" # working directory
-    # PS1+="\$(prompt_git \"${white} on ${cyan}\")" # git repository details
-    # PS1+="\n"
-    # PS1+="\[${white}\]\$ \[${reset}\]" # $ (and reset color)
 
     export PS1
 }
