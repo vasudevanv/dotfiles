@@ -2,6 +2,33 @@
 
 # functions
 
+get_sysinfo() {
+    # Operating System Information
+    os_version=$(uname -s) # OS name (Linux, Darwin, etc.)
+    os_release=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d '=' -f2 | sed 's/"//g')
+    echo "Operating System: $os_version - $os_release"
+
+    # Processor Information
+    processor=$(grep -m 1 'model name' /proc/cpuinfo | cut -d ':' -f2 | sed 's/^ //')
+    echo "Processor: $processor"
+
+    # RAM Information
+    total_ram=$(free -h | grep Mem | awk '{print $2}')
+    echo "RAM: $total_ram"
+
+    # GPU Information
+    if command -v lspci &> /dev/null; then
+        gpu=$(lspci | grep -i vga | awk -F: '{print $3}')
+        if [ -n "$gpu" ]; then
+            echo "GPU: $gpu"
+        else
+            echo "GPU: Not found"
+        fi
+    else
+        echo "lspci command not found. GPU info could not be retrieved."
+    fi
+}
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_"
